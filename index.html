@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soma Puzzle</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>        
+        #resultado {
+          margin-top: 20px;
+          font-size: 20px;
+        }
+      </style>
+  </head>
+  <body class="bg-gradient-to-b from-blue-100 to-white min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md mx-auto p-4">
+      <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Soma Puzzle</h1>
+
+      <!-- LINHAS DE SOMA -->
+      <div class="space-y-4">
+
+        <!-- Linha 1 -->
+        <div class="flex items-center justify-between bg-white shadow rounded-2xl p-4">
+          <div id="pergunta1" class="text-xl font-semibold text-gray-700"></div>
+          <input type="number" id="resposta1" class="w-20 p-2 border rounded-lg text-center text-xl shadow focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+
+        <!-- Linha 2 -->
+        <div class="flex items-center justify-between bg-white shadow rounded-2xl p-4">
+          <div id="pergunta2" class="text-xl font-semibold text-gray-700"></div>
+          <input type="number" id="resposta2" class="w-20 p-2 border rounded-lg text-center text-xl shadow focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+
+        <!-- Linha 3 -->
+        <div class="flex items-center justify-between bg-white shadow rounded-2xl p-4">
+          <div id="pergunta3" class="text-xl font-semibold text-gray-700"></div>
+          <input type="number" id="resposta3" class="w-20 p-2 border rounded-lg text-center text-xl shadow focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+
+        <!-- Linha 4 -->
+        <div class="flex items-center justify-between bg-white shadow rounded-2xl p-4">
+          <div id="pergunta4" class="text-xl font-semibold text-gray-700"></div>
+          <input type="number" id="resposta4" class="w-20 p-2 border rounded-lg text-center text-xl shadow focus:outline-none focus:ring-2 focus:ring-blue-400" />
+        </div>
+      </div>
+
+      <!-- BOTÃO VERIFICAR -->
+      <div class="mt-6 text-center">
+        <button
+          id="validar"
+          class="bg-blue-600 text-white px-6 py-3 rounded-full text-lg font-semibold shadow-lg hover:bg-blue-700 transition"
+          onclick="verificar()"
+        >
+          VERIFICAR
+        </button><div id="resultado"></div>
+      </div>
+    </div>
+  
+    
+
+    <script>
+        let numero1, numero2, numero3, numero4, numero5, numero6, numero7, numero8;
+    
+        function gerarNumeros() {
+          numero1 = Math.floor(Math.random() * 90) + 10;
+          numero2 = Math.floor(Math.random() * 90) + 10;
+          numero3 = Math.floor(Math.random() * 90) + 10;
+          numero4 = Math.floor(Math.random() * 90) + 10;
+          numero5 = Math.floor(Math.random() * 90) + 10;
+          numero6 = Math.floor(Math.random() * 90) + 10;
+          numero7 = Math.floor(Math.random() * 90) + 10;
+          numero8 = Math.floor(Math.random() * 90) + 10;
+          document.getElementById("pergunta1").textContent = `Quanto é: ${numero1} + ${numero2} = `;
+          document.getElementById("pergunta2").textContent = `Quanto é: ${numero3} + ${numero4} = `;
+          document.getElementById("pergunta3").textContent = `Quanto é: ${numero5} + ${numero6} = `;
+          document.getElementById("pergunta4").textContent = `Quanto é: ${numero7} + ${numero8} = `;
+          document.getElementById("resposta1").value = "";
+          document.getElementById("resposta2").value = "";
+          document.getElementById("resposta3").value = "";
+          document.getElementById("resposta4").value = "";
+          document.getElementById("resultado").textContent = "";
+        }
+    
+        function verificar() {
+          const respostaUsuario1 = parseInt(document.getElementById("resposta1").value);
+          const respostaUsuario2 = parseInt(document.getElementById("resposta2").value);
+          const respostaUsuario3 = parseInt(document.getElementById("resposta3").value);
+          const respostaUsuario4 = parseInt(document.getElementById("resposta4").value);
+          const somaCorreta1 = numero1 + numero2;
+          const somaCorreta2 = numero3 + numero4;
+          const somaCorreta3 = numero5 + numero6;
+          const somaCorreta4 = numero7 + numero8;
+    
+          if (respostaUsuario1 === somaCorreta1 && respostaUsuario2 === somaCorreta2 && respostaUsuario3 === somaCorreta3 && respostaUsuario4 === somaCorreta4) {
+            document.getElementById("resultado").textContent = "✅ Respostas corretas!";
+            document.getElementById("resultado").style.color = "green";
+          } else {
+            document.getElementById("resultado").textContent = `❌ Respostas erradas.`;
+            document.getElementById("resultado").style.color = "red";
+          }
+    
+          // Gerar nova pergunta após 2 segundos
+          setTimeout(gerarNumeros, 2000);
+        }
+    
+        // Gera os primeiros números ao carregar
+        window.onload = gerarNumeros;
+      </script>
+    </body>
+</html>
